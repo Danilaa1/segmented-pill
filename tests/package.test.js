@@ -36,6 +36,8 @@ describe("public package surface", () => {
 
   it("keeps font installation optional and shows arbitrary content switching", () => {
     expect(readme).toContain("npm install segmented-pill");
+    expect(readme).toContain("pnpm add segmented-pill");
+    expect(readme).toContain("bun add segmented-pill");
     expect(readme).not.toContain("npm install segmented-pill @fontsource-variable/geist");
     expect(readme).toContain('value === "overview"');
     expect(readme).toContain("v-if=\"value === 'overview'\"");

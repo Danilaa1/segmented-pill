@@ -9,8 +9,22 @@ Accessible segmented control for React and Vue. Static by default, with optional
 
 ![Segmented Pill with Overview selected](./assets/preview.svg)
 
-```bash
+**npm**
+
+```sh
 npm install segmented-pill
+```
+
+**pnpm**
+
+```sh
+pnpm add segmented-pill
+```
+
+**Bun**
+
+```sh
+bun add segmented-pill
 ```
 
 Geist is optional. If your app already loads it, Segmented Pill uses it automatically; otherwise it falls back to your system sans-serif font.
