@@ -1,5 +1,5 @@
 {
-  "name": "segmented-control",
+  "name": "segmented-pill",
   "version": "0.1.0",
   "description": "Dependency-free accessible segmented control with an optional sliding pill.",
   "type": "module",

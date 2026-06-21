@@ -2,7 +2,7 @@
 
 ## Goal
 
-Extract the segmented tab UI from the slot-text landing page into a standalone, dependency-free package under `~/Developer/segmented-control`. Preserve the source landing page unchanged.
+Extract the segmented tab UI from the slot-text landing page into a standalone, dependency-free package under `~/Developer/segmented-pill`. Preserve the source landing page unchanged.
 
 ## Scope
 
@@ -19,12 +19,13 @@ Included:
 - Automated behavior and accessibility tests
 - README with a preview image and copy-paste examples
 - Small browser demo
+- Thin React and Vue wrappers over the same Vanilla controller
 
 ## Public API
 
 ```js
-import { segmentedControl } from "segmented-control";
-import "segmented-control/style.css";
+import { segmentedControl } from "segmented-pill";
+import "segmented-pill/style.css";
 
 const control = segmentedControl(element, {
   value: "vanilla",
@@ -90,7 +91,7 @@ Implementation uses a dedicated indicator element instead of CSS anchor position
 ## Package structure
 
 ```text
-segmented-control/
+segmented-pill/
   src/index.js          controller and validation
   src/style.css         component styles and custom properties
   tests/index.test.js   behavior and accessibility tests
@@ -103,9 +104,13 @@ segmented-control/
 
 The npm package exports the JavaScript entry, type declarations, and stylesheet. Core runtime has no dependencies.
 
+Optional `segmented-pill/react` and `segmented-pill/vue` entrypoints render buttons from an `items` array and delegate behavior to the core controller. React exposes `value` and `onValueChange`; Vue exposes `modelValue` through `v-model`. React and Vue are optional peer dependencies, not core runtime dependencies.
+
 ## Testing and release checks
 
 Tests cover initialization, click selection, keyboard navigation, wrapping, disabled items, programmatic selection, callback behavior, cleanup, generated ARIA state, and reduced-motion-compatible class behavior.
+
+Wrapper tests cover rendered items, value synchronization, emitted user changes, disabled items, and unmount cleanup.
 
 Release verification runs:
 

@@ -19,6 +19,8 @@
 - `examples/index.html`: runnable browser example covering static and animated modes.
 - `assets/preview.svg`: compact visual README preview.
 - `README.md`: install, usage, API, accessibility, theming, and development guide.
+- `src/react.js` and `src/react.d.ts`: optional React wrapper and types.
+- `src/vue.js` and `src/vue.d.ts`: optional Vue wrapper and types.
 - `package.json`: exports, scripts, metadata, runtime files, and dependency declarations.
 - `vite.config.js`: library build configuration.
 - `LICENSE`: MIT license.
@@ -219,4 +221,48 @@ Expected: no changes created by extraction.
 ```bash
 git add package.json package-lock.json vite.config.js
 git commit -m "chore: finalize package output"
+```
+
+### Task 6: React and Vue wrappers
+
+**Files:**
+- Create: `src/react.js`
+- Create: `src/react.d.ts`
+- Create: `src/vue.js`
+- Create: `src/vue.d.ts`
+- Create: `tests/react.test.js`
+- Create: `tests/vue.test.js`
+- Modify: `package.json`
+- Modify: `vite.config.js`
+- Modify: `README.md`
+
+- [ ] **Step 1: Write failing wrapper tests**
+
+Test rendered items, initial values, controlled value synchronization, user change callbacks/events, disabled items, and unmount cleanup for both wrappers.
+
+- [ ] **Step 2: Verify RED**
+
+Run: `npm test -- --run`
+
+Expected: FAIL because wrapper entrypoints do not exist.
+
+- [ ] **Step 3: Implement thin wrappers**
+
+Render buttons from an `items` array and delegate selection, keyboard behavior, indicator motion, and cleanup to `segmentedControl()`. React exposes `value` and `onValueChange`; Vue exposes `modelValue` through `v-model`.
+
+- [ ] **Step 4: Add wrapper types and exports**
+
+Expose `segmented-pill/react` and `segmented-pill/vue`, keep React and Vue optional peers, and externalize both frameworks from package bundles.
+
+- [ ] **Step 5: Verify GREEN and package contents**
+
+Run: `npm run check && npm run pack:check`
+
+Expected: all tests/builds pass and tarball includes core, React, Vue, type declarations, CSS, docs, preview, and examples.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add src tests package.json package-lock.json vite.config.js README.md
+git commit -m "feat: add React and Vue wrappers"
 ```

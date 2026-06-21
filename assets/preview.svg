@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="240" viewBox="0 0 1120 240" role="img" aria-labelledby="title description">
+  <title id="title">Segmented Pill preview</title>
+  <desc id="description">A five-item segmented control with Vanilla selected.</desc>
+  <rect width="1120" height="240" rx="24" fill="#fafafa"/>
+  <rect x="150" y="72" width="820" height="96" rx="24" fill="#ededee"/>
+  <rect x="156" y="78" width="182" height="84" rx="18" fill="#fff" stroke="#000" stroke-opacity=".06"/>
+  <path d="M174 161.5h146" stroke="#000" stroke-opacity=".08"/>
+  <g fill="#56565f" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="32" font-weight="500" text-anchor="middle">
+    <text x="247" y="132" fill="#18181b">Vanilla</text>
+    <text x="416" y="132">React</text>
+    <text x="557" y="132">Vue</text>
+    <text x="699" y="132">Solid</text>
+    <text x="859" y="132">Svelte</text>
+  </g>
+</svg>
