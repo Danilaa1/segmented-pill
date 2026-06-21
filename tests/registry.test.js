@@ -18,6 +18,7 @@ const vercelConfig = readJsonOptional("vercel.json");
 const packageJson = readJsonOptional("package.json");
 const gitignore = readOptional(".gitignore");
 const readme = readOptional("README.md");
+const viteConfig = readOptional("vite.config.js");
 
 describe("hosted shadcn registry", () => {
   it("defines one npm-backed segmented-pill UI item", () => {
@@ -63,6 +64,10 @@ describe("hosted shadcn registry", () => {
     });
     expect(gitignore).toContain("/public/r/");
     expect(gitignore).toContain("/.vercel/");
+  });
+
+  it("keeps generated registry payloads out of the library build", () => {
+    expect(viteConfig).toContain("copyPublicDir: false");
   });
 
   it("documents the optional hosted React install path", () => {
