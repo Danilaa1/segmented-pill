@@ -14,14 +14,18 @@ export function SegmentedPill({
   const rootRef = useRef(null);
   const controlRef = useRef(null);
   const onValueChangeRef = useRef(onValueChange);
+  const valueRef = useRef(value);
+  const defaultValueRef = useRef(defaultValue);
   onValueChangeRef.current = onValueChange;
+  valueRef.current = value;
+  defaultValueRef.current = defaultValue;
   const itemSignature = JSON.stringify(
     items.map((item) => [item.value, Boolean(item.disabled)]),
   );
 
   useLayoutEffect(() => {
     const control = segmentedControl(rootRef.current, {
-      value: value ?? defaultValue,
+      value: valueRef.current ?? defaultValueRef.current,
       animated,
       onChange(nextValue) {
         onValueChangeRef.current?.(nextValue);
@@ -33,7 +37,7 @@ export function SegmentedPill({
       control.destroy();
       controlRef.current = null;
     };
-  }, [itemSignature, animated, defaultValue]);
+  }, [itemSignature, animated]);
 
   useLayoutEffect(() => {
     const control = controlRef.current;
