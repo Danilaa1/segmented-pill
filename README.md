@@ -27,6 +27,22 @@ pnpm add segmented-pill
 bun add segmented-pill
 ```
 
+## shadcn registry (React)
+
+Add the hosted registry once:
+
+```sh
+npx shadcn@latest registry add @segmented-pill=https://segmented-pill.vercel.app/r/{name}.json
+```
+
+Then install the React wrapper:
+
+```sh
+npx shadcn@latest add @segmented-pill/segmented-pill
+```
+
+The wrapper installs `segmented-pill` and its stylesheet. npm remains the source of updates; the registry is an optional shadcn-friendly install path.
+
 Geist is optional. If your app already loads it, Segmented Pill uses it automatically; otherwise it falls back to your system sans-serif font.
 
 ## React
