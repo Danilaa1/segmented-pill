@@ -44,6 +44,7 @@ export function segmentedControl(root, options = {}) {
   }));
 
   let activeItem = enabledItems[0];
+  let squashAnimation;
   if (options.value !== undefined) {
     const requestedItem = items.find((item) => item.dataset.value === options.value);
     if (!requestedItem) {
@@ -81,6 +82,7 @@ export function segmentedControl(root, options = {}) {
     activeItem = item;
     renderSelection();
     positionIndicator();
+    squashIndicator();
     if (notify) options.onChange?.(activeItem.dataset.value);
   }
 
@@ -127,6 +129,26 @@ export function segmentedControl(root, options = {}) {
     indicator.style.transform = `translate3d(${itemRect.left - rootRect.left}px, ${itemRect.top - rootRect.top}px, 0)`;
   }
 
+  function squashIndicator() {
+    const reduceMotion = typeof globalThis.matchMedia === "function"
+      && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!options.animated || reduceMotion || typeof indicator.animate !== "function") return;
+
+    squashAnimation?.cancel();
+    squashAnimation = indicator.animate(
+      [
+        { scale: "1 1" },
+        { scale: "1.07 0.93", offset: 0.55 },
+        { scale: "1 1" },
+      ],
+      {
+        duration: 260,
+        easing: "cubic-bezier(0.2, 0, 0, 1)",
+      },
+    );
+  }
+
   root.setAttribute("role", "tablist");
   root.classList.toggle("is-animated", options.animated === true);
   root.prepend(indicator);
@@ -163,6 +185,7 @@ export function segmentedControl(root, options = {}) {
       root.removeEventListener("click", onClick);
       root.removeEventListener("keydown", onKeyDown);
       resizeObserver?.disconnect();
+      squashAnimation?.cancel();
       window.removeEventListener("resize", positionIndicator);
       indicator.remove();
       restoreAttribute(root, "role", rootRole);

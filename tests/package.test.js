@@ -33,4 +33,10 @@ describe("public package surface", () => {
     expect(readme).toContain("img.shields.io/badge/License-MIT");
     expect(readme).not.toContain("npm/v/segmented-pill");
   });
+
+  it("shows consumers how to load Geist and switch arbitrary content", () => {
+    expect(readme).toContain("@fontsource-variable/geist");
+    expect(readme).toContain('value === "overview"');
+    expect(readme).toContain("v-if=\"value === 'overview'\"");
+  });
 });

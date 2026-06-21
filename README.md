@@ -10,7 +10,13 @@ Accessible segmented control for React and Vue. Static by default, with optional
 ![Segmented Pill with Overview selected](./assets/preview.svg)
 
 ```bash
-npm install segmented-pill
+npm install segmented-pill @fontsource-variable/geist
+```
+
+Load Geist once in your app. Segmented Pill then picks it up automatically:
+
+```js
+import "@fontsource-variable/geist";
 ```
 
 ## React
@@ -29,7 +35,7 @@ const items = [
 export function Navigation() {
   const [value, setValue] = useState("overview");
 
-  return (
+  return <>
     <SegmentedPill
       aria-label="Section"
       items={items}
@@ -37,7 +43,11 @@ export function Navigation() {
       onValueChange={setValue}
       animated
     />
-  );
+
+    {value === "overview" && <Overview />}
+    {value === "activity" && <Activity />}
+    {value === "settings" && <Settings />}
+  </>;
 }
 ```
 
@@ -64,6 +74,10 @@ const items = [
     :items="items"
     animated
   />
+
+  <Overview v-if="value === 'overview'" />
+  <Activity v-else-if="value === 'activity'" />
+  <Settings v-else />
 </template>
 ```
 
@@ -77,7 +91,7 @@ const items = [
 | Change event | `onValueChange` | `change` |
 | Sliding pill | `animated` | `animated` |
 
-`animated` defaults to `false`. Reduced-motion preferences always disable its transition.
+`animated` defaults to `false`. When enabled, the pill slides with a small stretch-and-squash response. Reduced-motion preferences always disable both effects.
 
 Arrow keys, Home, End, Enter, and Space work automatically. Disabled items are skipped, focus stays visible, and ARIA selection state remains synchronized. Add `aria-label` or `aria-labelledby` to every control.
 
@@ -85,7 +99,7 @@ Arrow keys, Home, End, Enter, and Space work automatically. Disabled items are s
 
 ```css
 .my-control {
-  --segmented-font-family: "Inter", sans-serif;
+  --segmented-font-family: "Geist", "Geist Variable", sans-serif;
   --segmented-track: #e9e3db;
   --segmented-pill: #fffdf9;
   --segmented-focus: #8a5a32;

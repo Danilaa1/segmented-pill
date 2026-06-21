@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -15,6 +15,8 @@ function render(markup = `
 
 afterEach(() => {
   document.body.innerHTML = "";
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
 
 describe("segmentedControl initialization", () => {
@@ -242,6 +244,43 @@ describe("segmentedControl indicator and cleanup", () => {
         && !item.classList.contains("is-active");
     })).toBe(true);
   });
+
+  it("adds a restrained squash while an animated pill moves", () => {
+    vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: false })));
+    const root = render();
+    segmentedControl(root, { animated: true });
+    const indicator = root.querySelector(".segmented-control__indicator");
+    const cancel = vi.fn();
+    indicator.animate = vi.fn(() => ({ cancel }));
+
+    root.querySelector('[data-value="react"]').click();
+    root.querySelector('[data-value="vue"]').click();
+
+    expect(indicator.animate).toHaveBeenCalledWith(
+      [
+        { scale: "1 1" },
+        { scale: "1.07 0.93", offset: 0.55 },
+        { scale: "1 1" },
+      ],
+      {
+        duration: 260,
+        easing: "cubic-bezier(0.2, 0, 0, 1)",
+      },
+    );
+    expect(cancel).toHaveBeenCalledOnce();
+  });
+
+  it("does not squash when reduced motion is requested", () => {
+    vi.stubGlobal("matchMedia", vi.fn(() => ({ matches: true })));
+    const root = render();
+    segmentedControl(root, { animated: true });
+    const indicator = root.querySelector(".segmented-control__indicator");
+    indicator.animate = vi.fn();
+
+    root.querySelector('[data-value="react"]').click();
+
+    expect(indicator.animate).not.toHaveBeenCalled();
+  });
 });
 
 describe("segmented control stylesheet", () => {
@@ -268,10 +307,11 @@ describe("segmented control stylesheet", () => {
     expect(css).not.toContain("min-height: 40px");
   });
 
-  it("uses an overridable Inter-first sans-serif font stack", () => {
+  it("uses an overridable Geist-first stack with tight tracking", () => {
     const css = readFileSync(resolve("src/style.css"), "utf8");
 
-    expect(css).toContain('--segmented-font-family: "Inter", ui-sans-serif, system-ui');
+    expect(css).toContain('--segmented-font-family: "Geist", "Geist Variable", ui-sans-serif, system-ui');
     expect(css).toContain("font-family: var(--segmented-font-family)");
+    expect(css).toContain("letter-spacing: -0.02em");
   });
 });
