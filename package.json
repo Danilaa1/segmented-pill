@@ -1,6 +1,6 @@
 {
   "name": "segmented-pill",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Accessible segmented control for React and Vue with an optional sliding pill.",
   "type": "module",
   "sideEffects": [
