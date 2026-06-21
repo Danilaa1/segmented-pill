@@ -1,17 +1,17 @@
 .segmented-control {
-  --segmented-track: #ededee;
+  --segmented-track: rgb(0 0 0 / 5%);
   --segmented-pill: #ffffff;
-  --segmented-text: #56565f;
+  --segmented-text: #52525b;
   --segmented-text-active: #18181b;
   --segmented-focus: #2563eb;
-  --segmented-radius: 12px;
+  --segmented-radius: 8px;
   --segmented-gap: 2px;
-  --segmented-padding: 3px;
-  --segmented-duration: 220ms;
-  --segmented-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --segmented-padding: 2px;
+  --segmented-duration: 260ms;
+  --segmented-easing: cubic-bezier(0.2, 0, 0, 1);
   --segmented-shadow:
-    0 1px 2px rgb(0 0 0 / 10%),
-    0 0 0 1px rgb(0 0 0 / 5%);
+    0 0 0 1px rgb(0 0 0 / 6%),
+    0 1px 2px rgb(0 0 0 / 7%);
 
   position: relative;
   display: inline-flex;
@@ -29,16 +29,15 @@
   position: relative;
   z-index: 1;
   min-width: 0;
-  min-height: 40px;
   margin: 0;
-  padding: 0 16px;
+  padding: 5px 10px;
   appearance: none;
   border: 0;
   border-radius: calc(var(--segmented-radius) - var(--segmented-padding));
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: 0.9375rem;
+  font-size: 11.5px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.01em;

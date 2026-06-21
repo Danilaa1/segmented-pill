@@ -257,4 +257,14 @@ describe("segmented control stylesheet", () => {
     expect(css).toContain("prefers-reduced-motion: reduce");
     expect(css).not.toContain("transition: all");
   });
+
+  it("preserves the compact landing-page geometry", () => {
+    const css = readFileSync(resolve("src/style.css"), "utf8");
+
+    expect(css).toContain("--segmented-radius: 8px");
+    expect(css).toContain("--segmented-padding: 2px");
+    expect(css).toContain("font-size: 11.5px");
+    expect(css).toContain("padding: 5px 10px");
+    expect(css).not.toContain("min-height: 40px");
+  });
 });
