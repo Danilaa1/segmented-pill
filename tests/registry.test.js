@@ -17,6 +17,7 @@ const wrapper = readOptional("registry/segmented-pill.tsx");
 const vercelConfig = readJsonOptional("vercel.json");
 const packageJson = readJsonOptional("package.json");
 const gitignore = readOptional(".gitignore");
+const readme = readOptional("README.md");
 
 describe("hosted shadcn registry", () => {
   it("defines one npm-backed segmented-pill UI item", () => {
@@ -62,5 +63,16 @@ describe("hosted shadcn registry", () => {
     });
     expect(gitignore).toContain("/public/r/");
     expect(gitignore).toContain("/.vercel/");
+  });
+
+  it("documents the optional hosted React install path", () => {
+    expect(readme).toContain("## shadcn registry (React)");
+    expect(readme).toContain(
+      "npx shadcn@latest registry add @segmented-pill=https://segmented-pill.vercel.app/r/{name}.json",
+    );
+    expect(readme).toContain(
+      "npx shadcn@latest add @segmented-pill/segmented-pill",
+    );
+    expect(readme).toContain("npm remains the source of updates");
   });
 });
