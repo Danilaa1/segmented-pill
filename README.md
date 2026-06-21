@@ -10,14 +10,10 @@ Accessible segmented control for React and Vue. Static by default, with optional
 ![Segmented Pill with Overview selected](./assets/preview.svg)
 
 ```bash
-npm install segmented-pill @fontsource-variable/geist
+npm install segmented-pill
 ```
 
-Load Geist once in your app. Segmented Pill then picks it up automatically:
-
-```js
-import "@fontsource-variable/geist";
-```
+Geist is optional. If your app already loads it, Segmented Pill uses it automatically; otherwise it falls back to your system sans-serif font.
 
 ## React
 

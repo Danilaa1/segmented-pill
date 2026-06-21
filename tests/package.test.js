@@ -34,8 +34,9 @@ describe("public package surface", () => {
     expect(readme).not.toContain("npm/v/segmented-pill");
   });
 
-  it("shows consumers how to load Geist and switch arbitrary content", () => {
-    expect(readme).toContain("@fontsource-variable/geist");
+  it("keeps font installation optional and shows arbitrary content switching", () => {
+    expect(readme).toContain("npm install segmented-pill");
+    expect(readme).not.toContain("npm install segmented-pill @fontsource-variable/geist");
     expect(readme).toContain('value === "overview"');
     expect(readme).toContain("v-if=\"value === 'overview'\"");
   });
