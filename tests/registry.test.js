@@ -70,13 +70,16 @@ describe("hosted shadcn registry", () => {
     expect(viteConfig).toContain("copyPublicDir: false");
   });
 
-  it("documents the optional hosted React install path", () => {
+  it("documents the direct hosted React install while the namespace is pending", () => {
     expect(readme).toContain("## shadcn registry (React)");
     expect(readme).toContain(
-      "npx shadcn@latest registry add @segmented-pill=https://segmented-pill.vercel.app/r/{name}.json",
+      "npx shadcn@latest add https://segmented-pill.vercel.app/r/segmented-pill.json",
     );
-    expect(readme).toContain(
-      "npx shadcn@latest add @segmented-pill/segmented-pill",
+    expect(readme).not.toContain(
+      "registry add @segmented-pill=https://segmented-pill.vercel.app/r/{name}.json",
+    );
+    expect(readme).not.toContain(
+      "add @segmented-pill/segmented-pill",
     );
     expect(readme).toContain("npm remains the source of updates");
   });

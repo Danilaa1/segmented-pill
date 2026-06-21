@@ -29,16 +29,10 @@ bun add segmented-pill
 
 ## shadcn registry (React)
 
-Add the hosted registry once:
+Install the React wrapper directly from the hosted registry:
 
 ```sh
-npx shadcn@latest registry add @segmented-pill=https://segmented-pill.vercel.app/r/{name}.json
-```
-
-Then install the React wrapper:
-
-```sh
-npx shadcn@latest add @segmented-pill/segmented-pill
+npx shadcn@latest add https://segmented-pill.vercel.app/r/segmented-pill.json
 ```
 
 The wrapper installs `segmented-pill` and its stylesheet. npm remains the source of updates; the registry is an optional shadcn-friendly install path.
