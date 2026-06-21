@@ -1,0 +1,90 @@
+.segmented-control {
+  --segmented-track: #ededee;
+  --segmented-pill: #ffffff;
+  --segmented-text: #56565f;
+  --segmented-text-active: #18181b;
+  --segmented-focus: #2563eb;
+  --segmented-radius: 12px;
+  --segmented-gap: 2px;
+  --segmented-padding: 3px;
+  --segmented-duration: 220ms;
+  --segmented-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --segmented-shadow:
+    0 1px 2px rgb(0 0 0 / 10%),
+    0 0 0 1px rgb(0 0 0 / 5%);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--segmented-gap);
+  padding: var(--segmented-padding);
+  border-radius: var(--segmented-radius);
+  background: var(--segmented-track);
+  color: var(--segmented-text);
+  isolation: isolate;
+  -webkit-font-smoothing: antialiased;
+}
+
+.segmented-control > button {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 40px;
+  margin: 0;
+  padding: 0 16px;
+  appearance: none;
+  border: 0;
+  border-radius: calc(var(--segmented-radius) - var(--segmented-padding));
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition-property: color, opacity;
+  transition-duration: 120ms;
+  transition-timing-function: ease;
+}
+
+.segmented-control > button:hover,
+.segmented-control > button.is-active {
+  color: var(--segmented-text-active);
+}
+
+.segmented-control > button:focus-visible {
+  outline: 2px solid var(--segmented-focus);
+  outline-offset: -2px;
+}
+
+.segmented-control > button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.segmented-control__indicator {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  border-radius: calc(var(--segmented-radius) - var(--segmented-padding));
+  background: var(--segmented-pill);
+  box-shadow: var(--segmented-shadow);
+  pointer-events: none;
+}
+
+.segmented-control.is-animated .segmented-control__indicator {
+  transition-property: transform;
+  transition-duration: var(--segmented-duration);
+  transition-timing-function: var(--segmented-easing);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmented-control.is-animated .segmented-control__indicator {
+    transition: none;
+    will-change: auto;
+  }
+}

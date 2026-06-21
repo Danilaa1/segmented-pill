@@ -1,4 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 import { segmentedControl } from "../src/index.js";
 
@@ -239,5 +241,20 @@ describe("segmentedControl indicator and cleanup", () => {
         && !item.hasAttribute("tabindex")
         && !item.classList.contains("is-active");
     })).toBe(true);
+  });
+});
+
+describe("segmented control stylesheet", () => {
+  it("ships the component, indicator, focus, animation, and reduced-motion contract", () => {
+    const stylesheetPath = resolve("src/style.css");
+    expect(existsSync(stylesheetPath)).toBe(true);
+    const css = readFileSync(stylesheetPath, "utf8");
+
+    expect(css).toContain(".segmented-control");
+    expect(css).toContain(".segmented-control__indicator");
+    expect(css).toContain(":focus-visible");
+    expect(css).toContain(".segmented-control.is-animated");
+    expect(css).toContain("prefers-reduced-motion: reduce");
+    expect(css).not.toContain("transition: all");
   });
 });
