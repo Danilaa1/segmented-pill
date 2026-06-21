@@ -3,9 +3,16 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/index.js",
+      entry: {
+        index: "src/index.js",
+        react: "src/react.js",
+        vue: "src/vue.js",
+      },
       formats: ["es"],
-      fileName: "index",
+      fileName: (_format, entryName) => `${entryName}.js`,
+    },
+    rollupOptions: {
+      external: ["react", "vue"],
     },
   },
   test: {

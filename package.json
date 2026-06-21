@@ -13,6 +13,14 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
+    },
     "./style.css": "./dist/style.css"
   },
   "files": [
@@ -24,7 +32,7 @@
   ],
   "scripts": {
     "test": "vitest",
-    "build": "vite build && cp src/index.d.ts dist/index.d.ts && cp src/style.css dist/style.css",
+    "build": "vite build && cp src/*.d.ts dist/ && cp src/style.css dist/style.css",
     "check": "vitest run && npm run build",
     "pack:check": "npm pack --dry-run --json"
   },
@@ -36,9 +44,25 @@
   ],
   "license": "MIT",
   "author": "Daniel Belyi",
+  "peerDependencies": {
+    "react": ">=18",
+    "vue": ">=3.4"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@vue/test-utils": "^2.4.11",
     "jsdom": "^26.1.0",
-    "vite": "^6.3.5",
-    "vitest": "^3.2.4"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vite": "^6.4.3",
+    "vitest": "^3.2.6",
+    "vue": "^3.5.38"
   }
 }
