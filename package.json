@@ -1,18 +1,12 @@
 {
   "name": "segmented-pill",
   "version": "0.1.0",
-  "description": "Dependency-free accessible segmented control with an optional sliding pill.",
+  "description": "Accessible segmented control for React and Vue with an optional sliding pill.",
   "type": "module",
   "sideEffects": [
     "./dist/style.css"
   ],
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
     "./react": {
       "types": "./dist/react.d.ts",
       "import": "./dist/react.js"
@@ -26,21 +20,21 @@
   "files": [
     "dist",
     "assets",
-    "examples",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "test": "vitest",
-    "build": "vite build && cp src/*.d.ts dist/ && cp src/style.css dist/style.css",
+    "build": "vite build && cp src/react.d.ts src/vue.d.ts dist/ && cp src/style.css dist/style.css",
     "check": "vitest run && npm run build",
     "pack:check": "npm pack --dry-run --json"
   },
   "keywords": [
     "segmented-control",
+    "react",
+    "vue",
     "tabs",
-    "accessibility",
-    "vanilla-js"
+    "accessibility"
   ],
   "license": "MIT",
   "author": "Daniel Belyi",

@@ -2,15 +2,17 @@
 
 ## Goal
 
-Extract the segmented tab UI from the slot-text landing page into a standalone, dependency-free package under `~/Developer/segmented-pill`. Preserve the source landing page unchanged.
+Extract the segmented tab UI from the slot-text landing page into a standalone React and Vue package under `~/Developer/segmented-pill`. Preserve the source landing page unchanged.
+
+The public Vanilla entry described in the initial design was removed after product review. The DOM controller remains private shared implementation for the React and Vue wrappers.
 
 ## Scope
 
-The package provides only the segmented control. It does not manage code panels, application content, sounds, or framework wrappers.
+The package provides only the segmented control. It does not manage code panels, application content, or sounds.
 
 Included:
 
-- Vanilla JavaScript controller
+- Private dependency-free DOM controller
 - Required CSS and documented custom properties
 - Static active pill by default
 - Optional sliding-pill animation
@@ -18,24 +20,22 @@ Included:
 - Type declarations
 - Automated behavior and accessibility tests
 - README with a preview image and copy-paste examples
-- Small browser demo
-- Thin React and Vue wrappers over the same Vanilla controller
+- Thin React and Vue wrappers over the same private controller
 
-## Public API
+## Internal controller
 
 ```js
-import { segmentedControl } from "segmented-pill";
-import "segmented-pill/style.css";
+import { segmentedControl } from "./index.js";
 
 const control = segmentedControl(element, {
-  value: "vanilla",
+  value: "overview",
   animated: true,
   onChange(value) {
     console.log(value);
   },
 });
 
-control.set("vue");
+control.set("activity");
 control.destroy();
 ```
 
@@ -59,9 +59,9 @@ Invalid roots, duplicate values, missing values, and unknown values passed to `s
 
 ```html
 <div class="segmented-control" aria-label="Framework">
-  <button type="button" data-value="vanilla">Vanilla</button>
-  <button type="button" data-value="react">React</button>
-  <button type="button" data-value="vue">Vue</button>
+  <button type="button" data-value="overview">Overview</button>
+  <button type="button" data-value="activity">Activity</button>
+  <button type="button" data-value="settings">Settings</button>
 </div>
 ```
 
@@ -93,16 +93,22 @@ Implementation uses a dedicated indicator element instead of CSS anchor position
 ```text
 segmented-pill/
   src/index.js          controller and validation
+  src/react.js          React wrapper
+  src/vue.js            Vue wrapper
+  src/react.d.ts        React types
+  src/vue.d.ts          Vue types
   src/style.css         component styles and custom properties
   tests/index.test.js   behavior and accessibility tests
-  examples/index.html   browser demo
+  tests/react.test.js   React wrapper tests
+  tests/vue.test.js     Vue wrapper tests
+  tests/package.test.js public surface tests
   assets/preview.svg    README preview
   README.md
   LICENSE
   package.json
 ```
 
-The npm package exports the JavaScript entry, type declarations, and stylesheet. Core runtime has no dependencies.
+The npm package exports only `segmented-pill/react`, `segmented-pill/vue`, and `segmented-pill/style.css`. The shared controller ships as an internal chunk without a package export.
 
 Optional `segmented-pill/react` and `segmented-pill/vue` entrypoints render buttons from an `items` array and delegate behavior to the core controller. React exposes `value` and `onValueChange`; Vue exposes `modelValue` through `v-model`. React and Vue are optional peer dependencies, not core runtime dependencies.
 
@@ -115,11 +121,10 @@ Wrapper tests cover rendered items, value synchronization, emitted user changes,
 Release verification runs:
 
 - unit tests
-- type check
 - production build
 - package tarball dry run
-- browser demo smoke check
+- React-specific quality scan
 
 ## Documentation
 
-README starts with the rendered component preview, then shows installation, minimal markup, minimal JavaScript, animation opt-in, API reference, accessibility behavior, theming variables, and local development commands. Examples remain short enough to copy without editing unrelated application code.
+README starts with focused React, Vue, accessibility, and license badges plus the rendered component preview. It then shows installation, one React example, one Vue example, a compact API mapping, accessibility behavior, and minimal theming.

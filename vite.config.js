@@ -4,7 +4,6 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        index: "src/index.js",
         react: "src/react.js",
         vue: "src/vue.js",
       },
@@ -13,6 +12,9 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["react", "vue"],
+      output: {
+        chunkFileNames: "core-[hash].js",
+      },
     },
   },
   test: {

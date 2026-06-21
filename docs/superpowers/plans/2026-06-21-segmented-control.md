@@ -1,5 +1,7 @@
 # Segmented Control Implementation Plan
 
+> **Update:** Final public surface is React and Vue only. The Vanilla controller remains private shared implementation; root export, public core types, and Vanilla demo/docs were removed.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a dependency-free, accessible segmented control package with an optional sliding pill and clear visual documentation.
