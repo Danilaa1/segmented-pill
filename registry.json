@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "segmented-pill",
+  "homepage": "https://github.com/Danilaa1/segmented-pill",
+  "items": [
+    {
+      "name": "segmented-pill",
+      "type": "registry:ui",
+      "title": "Segmented Pill",
+      "description": "Accessible segmented control for React with optional sliding motion.",
+      "author": "Daniel Belyi",
+      "dependencies": ["segmented-pill@^0.1.3"],
+      "files": [
+        {
+          "path": "registry/segmented-pill.tsx",
+          "type": "registry:ui",
+          "target": "@ui/segmented-pill.tsx"
+        }
+      ]
+    }
+  ]
+}
