@@ -85,6 +85,7 @@ Arrow keys, Home, End, Enter, and Space work automatically. Disabled items are s
 
 ```css
 .my-control {
+  --segmented-font-family: "Inter", sans-serif;
   --segmented-track: #e9e3db;
   --segmented-pill: #fffdf9;
   --segmented-focus: #8a5a32;

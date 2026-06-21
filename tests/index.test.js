@@ -267,4 +267,11 @@ describe("segmented control stylesheet", () => {
     expect(css).toContain("padding: 5px 10px");
     expect(css).not.toContain("min-height: 40px");
   });
+
+  it("uses an overridable Inter-first sans-serif font stack", () => {
+    const css = readFileSync(resolve("src/style.css"), "utf8");
+
+    expect(css).toContain('--segmented-font-family: "Inter", ui-sans-serif, system-ui');
+    expect(css).toContain("font-family: var(--segmented-font-family)");
+  });
 });
